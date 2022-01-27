@@ -5,3 +5,7 @@ var CartoDB_Positron = L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/
 	subdomains: 'abcd',
 	maxZoom: 20
 }).addTo(map);
+
+$.getJSON("restaurants.geojson",function(data){
+    L.geoJson(data).addTo(map);
+  });
