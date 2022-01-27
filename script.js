@@ -6,6 +6,90 @@ var CartoDB_Positron = L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/
 	maxZoom: 20
 }).addTo(map);
 
-$.getJSON("restaurants.geojson",function(data){
-    L.geoJson(data).addTo(map);
-  });
+function onEachFeature(feature, layer) {       layer.bindPopup(feature.properties.name);
+}
+
+var restPoints = {
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Salt and Smoke",
+        "description": "Our favorite bbq joint. We always take out-of-town visitors here.",
+        "url": "https://saltandsmokebbq.com"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.30506101804117,
+          38.65612871682558
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Morning Glory Diner",
+        "description": "Best slinger in the city!",
+        "url": "https://morningglorydiner.square.site/"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.2259506603557,
+          38.59344865082094
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Mai Lee",
+        "url": "https://www.maileestl.com/",
+        "description": "My wife's favorite Vietnamese joint."
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.33737814862232,
+          38.62746928042913
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "url": "https://www.urbanchestnut.com/visit/the-grove-brewery-and-bierhall",
+        "name": "Urban Chestnut Bierhall",
+        "description": "Good thin-crust pizza to go with your beer"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.26098196175731,
+          38.62663719046965
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "description": "Top-notch Lebanese food",
+        "url": "https://www.thevinestl.com/thevinecafe/Home.html",
+        "name": "The Vine"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.24284498768233,
+          38.60031501305363
+        ]
+      }
+    }
+  ]
+}
+
+L.geoJSON(restPoints, {
+    onEachFeature: onEachFeature
+}).addTo(map);
