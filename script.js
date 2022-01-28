@@ -1,14 +1,19 @@
+// initialize the map
 var map = L.map('restaurantMap').setView([38.625, -90.286538], 12);
 
+// initialize the basemap layer
 var CartoDB_Positron = L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
 	attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
 	subdomains: 'abcd',
 	maxZoom: 20
 }).addTo(map);
 
-function onEachFeature(feature, layer) {       layer.bindPopup(feature.properties.name);
+// A function we'll use later that will add a popup to each marker.
+function onEachFeature(feature, layer) { layer.bindPopup(
+	"<p1><b><a href="+ feature.properties.url + ">" + feature.properties.name + "</a></b><br/>" + feature.properties.description);
 }
 
+// For this app, I'm going to put the geojson in the actual script.js file. I know, I know, it's inelegant.
 var restPoints = {
   "type": "FeatureCollection",
   "features": [
@@ -90,6 +95,7 @@ var restPoints = {
   ]
 }
 
+// Then we add the geojson to the map and call that function we set up earlier.
 L.geoJSON(restPoints, {
     onEachFeature: onEachFeature
 }).addTo(map);
